@@ -9,6 +9,8 @@ package com.adenbofa.questionservice.controller;
 import java.util.List;
 
 import com.adenbofa.questionservice.model.Question;
+import com.adenbofa.questionservice.model.QuestionWrapper;
+import com.adenbofa.questionservice.model.Response;
 import com.adenbofa.questionservice.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,5 +55,15 @@ public class QuestionController {
     @GetMapping("generate")
     public ResponseEntity<List<Integer>> getQuestionsForQuiz(@RequestParam String categoryName, @RequestParam int numQuestions){
         return questionService.getQuestionsForQuiz(categoryName, numQuestions);
+    }
+
+    @PostMapping("getQuestions")
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsFromId(@RequestBody List<Integer> questionIds){
+        return questionService.getQuestionsFromId(questionIds);
+    }
+
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return questionService.getScore(responses);
     }
 }
